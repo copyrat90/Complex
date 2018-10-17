@@ -1,6 +1,7 @@
 #ifndef COMPLEX_H
 #define COMPLEX_H
 
+#include "common.h"
 #include "rational.h"
 
 
@@ -38,5 +39,7 @@ private:
 	Rational realPart;
 	Rational imaginaryPart;
 };
+
+ostream& operator <<(ostream& out, const Complex& c);
 
 #endif

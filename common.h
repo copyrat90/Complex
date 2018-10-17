@@ -3,6 +3,9 @@
 
 #include <iostream>
 #include <cmath>
-//#define _DEBUG_MODE_
+
+using namespace std;
+
+#define _DEBUG_MODE_
 
 #endif

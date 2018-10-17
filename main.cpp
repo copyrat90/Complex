@@ -46,6 +46,12 @@ Complex getComplex(void)
 
 int main(int argc, char** argv)
 {
+#ifdef _DEBUG_MODE_
+	cout << Rational(1,2) + 1 << endl;
+	cout << Complex(1,2) + 1 << endl;
+	cout << Rational::getObjCnt() << endl;
+#endif
+	
 	cout << "복소수 덧셈 뺄셈 프로그램입니다." << endl;
 	cout << "항 두개만 지원합니다." << endl << endl;
 

@@ -46,3 +46,10 @@ void Complex::print() const
 	
 	std::cout << " / " << imaginaryPart.denominator << ") * i";
 }
+
+
+ostream& operator <<(ostream& out, const Complex& c)
+{
+	c.print();
+	return out;
+}

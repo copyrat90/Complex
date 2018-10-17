@@ -2,6 +2,13 @@
 #include "rational.h"
 
 
+int Rational::objCnt = 0;
+
+int Rational::getObjCnt()
+{
+	return objCnt;
+}
+
 Rational Rational::add(const Rational& other) const
 {
 #ifdef _DEBUG_MODE_
@@ -51,6 +58,7 @@ Rational::Rational(int numerator, int denominator)
 #ifdef _DEBUG_MODE_
 	std::cout << "Rational::Rational(" << numerator << ", " << denominator << ")\n";
 #endif
+	objCnt++;
 	set(numerator, denominator);
 }
 
@@ -80,6 +88,12 @@ void Rational::set(int numerator, int denominator)
 }
 
 
+Rational::Rational(const Rational& r)
+	:numerator(r.numerator), denominator(r.denominator)
+{
+	objCnt++;
+}
+
 // 반드시 big >= small 이어야 함.  함수 호출 전 조건검사 필요. 
 int Rational::gcd(int big, int small) const
 {
@@ -93,4 +107,20 @@ int Rational::gcd(int big, int small) const
 void Rational::print() const
 {
 	std::cout << numerator << " / " << denominator;
+}
+
+
+ostream& operator <<(ostream& out, const Rational& r)
+{
+	r.print();
+	return out;
+}
+
+
+Rational::~Rational()
+{
+	objCnt--;
+#ifdef _DEBUG_MODE_
+	std::cout << "Rational::~Rational()" << std::endl;
+#endif
 }
