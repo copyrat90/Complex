@@ -1,55 +1,33 @@
-#include "common.h"
+#include <iostream>
 #include "complex.h"
 
+using namespace std;
 
-Complex Complex::add(const Complex& other) const
+
+const Complex Complex::operator +(const Complex& other) const
 {
-#ifdef _DEBUG_MODE_
-	std::cout << "Complex Complex::add(const Complex& other) const" << std::endl;
-#endif
-	return Complex(this->imaginaryPart + other.imaginaryPart, this->realPart + other.realPart);
+	return Complex(this->realPart + other.realPart, this->imaginaryPart + other.imaginaryPart);
 }
 
 
-Complex Complex::multiply(const Complex& other) const
+const Complex Complex::operator *(const Complex& other) const
 {
-	Rational imaginaryTemp = this->realPart * other.imaginaryPart + this->imaginaryPart * other.realPart;
-	Rational realTemp = this->realPart * other.realPart - this->imaginaryPart * other.imaginaryPart;
+	int realTemp = this->realPart * other.realPart - this->imaginaryPart * other.imaginaryPart;
+	int imaginaryTemp = this->realPart * other.imaginaryPart + this->imaginaryPart * other.realPart;
 	
-	return Complex(imaginaryTemp, realTemp);
-}
-
-
-Complex Complex::operator +(const Complex& other) const
-{
-#ifdef _DEBUG_MODE_
-	std::cout << "Complex Complex::operator +(const Complex& other) const" << std::endl;
-#endif
-	return add(other);
-}
-
-
-Complex Complex::operator *(const Complex& other) const
-{
-	return multiply(other);
-}
-
-
-void Complex::print() const
-{
-	std::cout << realPart.numerator << " / " << realPart.denominator;
-	
-	if (imaginaryPart.numerator < 0)
-		std::cout << " - (" << abs(imaginaryPart.numerator);
-	else
-		std::cout << " + (" << imaginaryPart.numerator;
-	
-	std::cout << " / " << imaginaryPart.denominator << ") * i";
+	return Complex(realTemp, imaginaryTemp);
 }
 
 
 ostream& operator <<(ostream& out, const Complex& c)
 {
-	c.print();
+	cout << c.realPart;
+	
+	if (c.imaginaryPart != 0)
+		if (c.imaginaryPart < 0)
+			cout << " - " << -c.imaginaryPart << 'i';
+		else
+			cout << " + " << c.imaginaryPart << 'i';
+	
 	return out;
 }
