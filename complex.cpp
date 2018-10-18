@@ -21,13 +21,13 @@ const Complex Complex::operator *(const Complex& other) const
 
 ostream& operator <<(ostream& out, const Complex& c)
 {
-	cout << c.realPart;
+	out << c.realPart;
 	
 	if (c.imaginaryPart != 0)
 		if (c.imaginaryPart < 0)
-			cout << " - " << -c.imaginaryPart << 'i';
+			out << " - " << -c.imaginaryPart << 'i';
 		else
-			cout << " + " << c.imaginaryPart << 'i';
+			out << " + " << c.imaginaryPart << 'i';
 	
 	return out;
 }
